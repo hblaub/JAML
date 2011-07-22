@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="JAML Editor"
+            extensions="jaml"
+            icon="icons/filetype.png"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            class="org.jaml.eclipse.editors.JAMLEditor"
+            id="org.jaml.eclipse.editors.JAMLEditor">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="JAML"
+            id="jaml-eclipse">
+      </category>
+      <wizard
+            name="JAML file"
+            icon="icons/filetype.png"
+            category="jaml-eclipse"
+            class="org.jaml.eclipse.wizards.JAMLNewFileWizard"
+            id="org.jaml.eclipse.wizards.JAMLNewFileWizard">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IFile"
+            id="jaml-eclipse.contribution1">
+         <menu
+               label="JAML Options"
+               path="additions"
+               id="jaml-eclipse.menu1">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               label="Add JAML"
+               class="org.jaml.eclipse.popup.actions.AddJAMLAction"
+               menubarPath="jaml-eclipse.menu1/group1"
+               enablesFor="1"
+               id="jaml-eclipse.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

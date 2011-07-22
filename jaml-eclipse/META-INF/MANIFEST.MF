@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: JAML4Eclipse
+Bundle-SymbolicName: jaml-eclipse; singleton:=true
+Bundle-Version: 1.0.0.0
+Bundle-Activator: org.jaml.eclipse.Activator
+Bundle-Vendor: JAML
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text,
+ org.eclipse.ui.editors,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide,
+ org.eclipse.jdt.core;bundle-version="3.7.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ActivationPolicy: lazy
+Import-Package: org.apache.log4j
+Bundle-ClassPath: .,
+ lib/jaml-api.jar,
+ lib/jaml-core.jar,
+ lib/jaml-utils.jar
