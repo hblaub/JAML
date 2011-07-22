@@ -1,0 +1,4 @@
+org.jaml.proportions.JSplitPaneHandler
+org.jaml.proportions.JMenuBarHandler
+org.jaml.proportions.AWTMenuBarHandler
+org.jaml.proportions.AWTComponentHandler
