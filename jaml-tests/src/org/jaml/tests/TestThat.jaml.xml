@@ -1,0 +1,22 @@
+<JFrame xmlns="http://java.com/namespaces/javax/swing"
+	xmlns:jaml="http://java.com/namespaces/org/jaml/syntax" xmlns:x="http://jaml.com/parser/2011/lang/additions"
+	DefaultCloseOperation="javax.swing.JFrame.EXIT_ON_CLOSE" Title="//{Binding test}"
+	Size="600;400">
+	<JMenuBar>
+		<JMenu Text="Test">
+			<JMenuItem Text="Option1" />
+			<JMenuItem Text="Option2" />
+		</JMenu>
+	</JMenuBar>
+	<JSplitPane Orientation="javax.swing.JSplitPane.VERTICAL_SPLIT">
+		<JPanel>
+			<JButton Text="FirstButton" x:Name="double" />
+			<jaml:Style Name="MyStyle" x:Name="single">
+				<JButton x:Name="triple" Text="Red" />
+			</jaml:Style>
+		</JPanel>
+		<JPanel>
+			<JButton Text="SecondButton" />
+		</JPanel>
+	</JSplitPane>
+</JFrame>
