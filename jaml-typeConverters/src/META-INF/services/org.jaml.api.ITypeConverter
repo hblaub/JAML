@@ -1,0 +1,6 @@
+org.jaml.converters.BooleanConverter
+org.jaml.converters.ColorConverter
+org.jaml.converters.DimensionConverter
+org.jaml.converters.IntegerConverter
+org.jaml.converters.RectangleConverter
+org.jaml.converters.StringConverter
