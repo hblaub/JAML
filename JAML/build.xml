@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="JAML" default="doAll" basedir=".">
+	<target name="doAll">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="build" />
+		<delete dir="dist" />
+		<delete dir="bin" />
+
+		<ant antfile="onetask.xml">
+			<property name="src" value="../jaml-api/src" />
+			<property name="build" value="build" />
+			<property name="dist" value="dist" />
+			<property name="jarname" value="jaml-api" />
+			<property name="copy.services" value="false" />
+			<property name="MainClass" value="" />
+			<property name="ClassPath" value="." />
+		</ant>
+
+		<ant antfile="onetask.xml">
+			<property name="src" value="../jaml-markupExtensions/src" />
+			<property name="build" value="build" />
+			<property name="dist" value="dist" />
+			<property name="jarname" value="jaml-markupExtensions" />
+			<property name="copy.services" value="true" />
+			<property name="MainClass" value="" />
+			<property name="ClassPath" value="jaml-api.jar" />
+			<property name="CompileClassPath" value=".;dist/jaml-api.jar" />
+		</ant>
+
+		<ant antfile="onetask.xml">
+			<property name="src" value="../jaml-proportionHandlers/src" />
+			<property name="build" value="build" />
+			<property name="dist" value="dist" />
+			<property name="jarname" value="jaml-proportionHandlers" />
+			<property name="copy.services" value="true" />
+			<property name="MainClass" value="" />
+			<property name="ClassPath" value="jaml-api.jar" />
+			<property name="CompileClassPath" value=".;dist/jaml-api.jar" />
+		</ant>
+
+		<ant antfile="onetask.xml">
+			<property name="src" value="../jaml-utils/src" />
+			<property name="build" value="build" />
+			<property name="dist" value="dist" />
+			<property name="jarname" value="jaml-utils" />
+			<property name="copy.services" value="false" />
+			<property name="MainClass" value="" />
+			<property name="ClassPath" value="jaml-api.jar" />
+			<property name="CompileClassPath" value=".;dist/jaml-api.jar" />
+		</ant>
+
+		<ant antfile="onetask.xml">
+			<property name="src" value="../jaml-typeConverters/src" />
+			<property name="build" value="build" />
+			<property name="dist" value="dist" />
+			<property name="jarname" value="jaml-typeConverters" />
+			<property name="copy.services" value="true" />
+			<property name="MainClass" value="" />
+			<property name="ClassPath" value="jaml-api.jar jaml-utils.jar" />
+			<property name="CompileClassPath" value=".;dist/jaml-api.jar;dist/jaml-utils.jar" />
+		</ant>
+
+		<ant antfile="onetask.xml">
+			<property name="src" value="../jaml-core/src" />
+			<property name="build" value="build" />
+			<property name="dist" value="dist" />
+			<property name="jarname" value="jaml-core" />
+			<property name="copy.services" value="false" />
+			<property name="MainClass" value="" />
+			<property name="ClassPath" value="jaml-api.jar jaml-utils.jar" />
+			<property name="CompileClassPath" value=".;dist/jaml-api.jar;dist/jaml-utils.jar" />
+		</ant>
+
+		<ant antfile="onetask.xml">
+			<property name="src" value="../jaml-tests/src" />
+			<property name="build" value="build" />
+			<property name="dist" value="dist" />
+			<property name="jarname" value="jaml-tests" />
+			<property name="copy.services" value="false" />
+			<property name="MainClass" value="org.jaml.tests.TestCLIX" />
+			<property name="ClassPath" value="jaml-core.jar jaml-markupExtensions.jar jaml-proportionHandlers.jar jaml-typeConverters.jar" />
+			<property name="CompileClassPath" value=".;dist/jaml-core.jar" />
+		</ant>
+
+		<ant antfile="onetask.xml">
+			<property name="src" value="../jaml-jsr223/src" />
+			<property name="build" value="build" />
+			<property name="dist" value="dist" />
+			<property name="jarname" value="jaml-jsr223" />
+			<property name="copy.services" value="true" />
+			<property name="MainClass" value="" />
+			<property name="ClassPath" value="jaml-core.jar" />
+			<property name="CompileClassPath" value=".;dist/jaml-core.jar" />
+		</ant>
+	</target>
+</project>

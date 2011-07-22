@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="JAML" default="compile" basedir=".">
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}" />
+	</target>
+
+	<target name="copy-services" if="${copy.services}">
+		<!-- Copy services files -->
+		<mkdir dir="${build}/META-INF" />
+		<copy todir="${build}/META-INF/services">
+			<fileset dir="${src}/META-INF/services" />
+		</copy>
+	</target>
+
+	<target name="compile" depends="init,copy-services" description="compile the source ">
+		<!-- Log -->
+		<echo>Started compilation of ${jarname}.jar...</echo>
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac classpath="${CompileClassPath}" srcdir="${src}" destdir="${build}" includeantruntime="false" />
+		<!-- Create the distribution directory -->
+		<!-- <mkdir dir="${dist}/lib" /> -->
+		<!-- Put everything in ${build} into the JAR file -->
+		<jar jarfile="${dist}/${jarname}.jar" filesetmanifest="mergewithoutmain" basedir="${build}">
+			<!-- include all xml files -->
+			<fileset dir="${src}">
+				<include name="**/*.xml" />
+				<include name="**/*.jaml" />
+			</fileset>
+			<!-- define MANIFEST.MF -->
+			<manifest>
+				<attribute name="Built-By" value="BuildServer" />
+				<attribute name="Main-Class" value="${MainClass}" />
+				<attribute name="Class-Path" value="${ClassPath}" />
+				<section name="${jarname}">
+					<attribute name="Implementation-Version" value="${DSTAMP}-${TSTAMP}" />
+				</section>
+			</manifest>
+		</jar>
+		<!-- Delete the ${build} -->
+		<delete dir="${build}" />
+		<!-- Log -->
+		<echo>Stopped deployment of ${jarname}.jar!</echo>
+	</target>
+</project>
