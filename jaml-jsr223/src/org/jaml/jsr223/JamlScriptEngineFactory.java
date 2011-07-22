@@ -56,7 +56,7 @@ public class JamlScriptEngineFactory implements ScriptEngineFactory {
 
 	@Override
 	public List<String> getMimeTypes() {
-		return Arrays.asList(new String[] { "application/xaml+xml" });
+		return Arrays.asList(new String[] { "application/jaml+xml" });
 	}
 
 	@Override
@@ -71,7 +71,6 @@ public class JamlScriptEngineFactory implements ScriptEngineFactory {
 
 	@Override
 	public Object getParameter(String arg0) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

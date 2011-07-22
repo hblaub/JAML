@@ -26,6 +26,8 @@ import javax.script.ScriptEngineFactory;
 import javax.script.ScriptException;
 import javax.script.SimpleBindings;
 
+import org.jaml.core.JamlReader;
+
 public class JamlScriptEngine extends AbstractScriptEngine {
 	protected ScriptEngineFactory factory;
 
