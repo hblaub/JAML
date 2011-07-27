@@ -25,6 +25,7 @@ public abstract class AbstractExtensionLoader<T, K> implements
 
 	public AbstractExtensionLoader() {
 		loader = ServiceLoader.load(getTypeClass());
+//		System.out.println( "----------loader: " + loader.toString() );
 	}
 
 	@Override

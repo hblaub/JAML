@@ -17,6 +17,11 @@
 package org.jaml.api;
 
 public interface IExtensionLoader<T, K> {
-
+	
+	/**
+	 * 
+	 * @param key
+	 * @return
+	 */
 	T get(K key);
 }

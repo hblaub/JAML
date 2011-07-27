@@ -16,6 +16,8 @@
  ******************************************************************************/
 package org.jaml.api;
 
+import org.jaml.objects.Element;
+
 public abstract class AbstractMarkupExtension implements IMarkupExtension {
 	protected String mainSymbol;
 
@@ -28,5 +30,5 @@ public abstract class AbstractMarkupExtension implements IMarkupExtension {
 		return mainSymbol;
 	}
 
-	public abstract void handleMarkup(String value);
+	public abstract void handleMarkup(String value, Element element);
 }

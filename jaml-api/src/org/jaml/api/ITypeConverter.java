@@ -22,11 +22,33 @@ public interface ITypeConverter {
 
 	Class<?>[] getConvertibleTypes();
 
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
 	String convertObject(Object value);
 
+	/**
+	 * 
+	 * @param locale
+	 * @param value
+	 * @return
+	 */
 	String convertObject(Locale locale, Object value);
 
+	/**
+	 * 
+	 * @param value
+	 * @return
+	 */
 	Object convertString(String value);
 
+	/**
+	 * 
+	 * @param locale
+	 * @param value
+	 * @return
+	 */
 	Object convertString(Locale locale, String value);
 }

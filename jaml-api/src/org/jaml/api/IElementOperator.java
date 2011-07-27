@@ -19,6 +19,10 @@ package org.jaml.api;
 import org.jaml.objects.Element;
 
 public interface IElementOperator {
-
+	
+	/**
+	 * 
+	 * @param element
+	 */
 	void process(Element element);
 }

@@ -16,9 +16,11 @@
  ******************************************************************************/
 package org.jaml.api;
 
+import org.jaml.objects.Element;
+
 public interface IMarkupExtension {
 
 	String getSymbol();
 
-	void handleMarkup(String value);
+	void handleMarkup(String value, Element element);
 }

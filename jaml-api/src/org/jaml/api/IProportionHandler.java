@@ -22,5 +22,10 @@ public interface IProportionHandler {
 
 	Class<?> getChildType();
 
+	/**
+	 * 
+	 * @param parent
+	 * @param child
+	 */
 	void process(Object parent, Object child);
 }
