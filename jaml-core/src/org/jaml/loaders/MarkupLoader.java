@@ -29,11 +29,11 @@ public class MarkupLoader extends
 
 	@Override
 	protected boolean eval(IMarkupExtension type, String key) {
-//		return type.getSymbol().equalsIgnoreCase(key);
+		return type.getSymbol().equalsIgnoreCase(key);
 		
-		String markup = key.substring(1, key.length() - 1);
-		String[] splitted = markup.split(" ");
-		String symbol = splitted[0];
-		return type.getSymbol().equalsIgnoreCase(symbol);
+//		String markup = key.substring(1, key.length() - 1);
+//		String[] splitted = markup.split(" ");
+//		String symbol = splitted[0];
+//		return type.getSymbol().equalsIgnoreCase(symbol);
 	}
 }
