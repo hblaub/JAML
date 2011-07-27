@@ -16,6 +16,7 @@
  ******************************************************************************/
 package org.jaml.core;
 
+import java.awt.Component;
 import java.io.InputStream;
 
 import org.jaml.api.Defaults;

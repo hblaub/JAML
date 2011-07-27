@@ -71,6 +71,7 @@ public class JamlReader {
 						// Get new element and add this new element as a child
 						// to the current element
 						temp = current.add(pair.getFirst());
+						System.out.println( "----------Current Element: " + pair.getFirst().getClass().getName() );
 						// Handle proportions
 						handleProportions(current, temp);
 					} else {
@@ -79,6 +80,7 @@ public class JamlReader {
 						// Save it as root element
 						rootElement = temp;
 					}
+					System.out.println( "----------Parsing Instructions: " + pair.getSecond() );
 					// Apply parsing instructions to the element
 					applyInstructions(temp, pair.getSecond());
 					// Handle object map
@@ -180,11 +182,12 @@ public class JamlReader {
 							+ " is in another namespace: " + attrNameSpace);
 					if (attrNameSpace.equals(Defaults.parserNamespace)) {
 						instruction = ParsingInstructions.valueOf(attrName);
-						parsingInstructions.put(instruction, attrValue);
+						parsingInstructions.put(instruction, attrValue);	
 					}
 				} else {
 					// Check if attribute is writable
 					if (cache.isWritable(attrName)) {
+//						System.out.println( "----------attrValue: " + attrValue );
 						IMarkupExtension markup = Env.get().getMarkups()
 								.get(attrValue);
 						if (markup != null) {
@@ -199,7 +202,8 @@ public class JamlReader {
 										.get(clazz);
 								if (converter != null) {
 									tmp = converter.convertString(attrValue);
-									System.out.println(converter + " " + tmp);
+//									System.out.println( "----------tmp: " + tmp );
+									System.out.println( converter + " " + tmp);
 									setter = ReflectionUtils
 											.searchSetterMethod(cache,
 													attrName, tmp.getClass());
@@ -254,7 +258,7 @@ public class JamlReader {
 		String symbol = splitted[0];
 		String arg = splitted[1];
 		System.out.println(symbol + ", " + extension);
-		extension.handleMarkup(arg);
+		extension.handleMarkup(arg, null );
 	}
 
 	public static Element load(InputStream inputStream) {
