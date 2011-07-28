@@ -17,6 +17,7 @@
 package org.jaml.markups;
 
 import org.jaml.api.AbstractMarkupExtension;
+import org.jaml.objects.Element;
 
 public class BindingExtension extends AbstractMarkupExtension {
 
