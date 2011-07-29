@@ -22,6 +22,14 @@ import org.jaml.api.IDelegate;
 import org.jaml.exceptions.DelegateException;
 import org.jaml.exceptions.DelegateInvalidException;
 
+/**
+ * Implementation of the IDelegate interface
+ * 
+ * @param <T>
+ *            Class of the method owner
+ * @param <P>
+ *            Parameter of the targeted method
+ */
 public class Delegate<T, P> implements IDelegate<T, P> {
 	private T object;
 	private String methodName;
@@ -42,16 +50,25 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 
 	@Override
 	public boolean isValid() {
-		if (method == null) {
-			try {
-				method = object.getClass().getMethod(methodName, paramClass);
-			} catch (SecurityException e) {
-				return false;
-			} catch (NoSuchMethodException e) {
-				return false;
-			}
+		method = method == null ? searchMethod(paramClass) : method;
+		method = method == null ? searchMethod() : method;
+		return method != null;
+	}
+
+	private Method searchMethod(Class<P> paramClass) {
+		try {
+			return object.getClass().getMethod(methodName, paramClass);
+		} catch (Exception e) {
+			return null;
 		}
-		return true;
+	}
+
+	private Method searchMethod() {
+		try {
+			return object.getClass().getMethod(methodName);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@Override
@@ -66,5 +83,34 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 			}
 		}
 		throw new DelegateInvalidException(object.getClass(), methodName);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public P invoke() {
+		if (isValid()) {
+			try {
+				return (P) method.invoke(object);
+			} catch (Exception exception) {
+				throw new DelegateException(object.getClass(), method, object,
+						exception);
+			}
+		}
+		throw new DelegateInvalidException(object.getClass(), methodName);
+	}
+
+	@Override
+	public boolean needsParameter() {
+		return method != null ? method.getParameterTypes().length > 0 : false;
+	}
+
+	@Override
+	public String toString() {
+		return String.format(
+				"Delegate of class '%s' --> %s",
+				object.getClass().getName(),
+				method == null ? String.format(
+						"should be method %s of type %s!", methodName,
+						paramClass.getName()) : method);
 	}
 }
