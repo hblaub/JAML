@@ -47,6 +47,10 @@ import org.jaml.util.IOUtils;
 import org.jaml.util.ReflectionUtils;
 import org.jaml.util.ThreadUtils;
 
+/**
+ * JAML reader
+ * 
+ */
 public class JamlReader {
 	private static final XMLInputFactory factory = XMLInputFactory
 			.newInstance();
@@ -254,7 +258,7 @@ public class JamlReader {
 		String symbol = splitted[0];
 		String arg = splitted[1];
 		System.out.println(symbol + ", " + extension);
-		extension.handleMarkup(arg);
+		extension.handleMarkup(arg, null);
 	}
 
 	public static Element load(InputStream inputStream) {
