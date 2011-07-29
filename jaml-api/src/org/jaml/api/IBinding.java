@@ -17,19 +17,19 @@
 package org.jaml.api;
 
 /**
- * Interface for invoking a method on a given object
+ * Interface for connecting two objects using delegates
  * 
- * @param <T>
- *            Object's class
+ * @param <F>
+ *            First object's class
+ * @param <S>
+ *            Second object's class
  * @param <P>
  *            Parameter's class for invocation
  */
-public interface IDelegate<T, P> {
-	boolean isValid();
+public interface IBinding<F, S, P> {
+	IDelegate<F, P> getFirstDelegate();
 
-	void invoke(P value);
+	IDelegate<S, P> getSecondDelegate();
 
-	P invoke();
-
-	boolean needsParameter();
+	boolean apply();
 }
