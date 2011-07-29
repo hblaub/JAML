@@ -26,7 +26,8 @@ public class BindingExtension extends AbstractMarkupExtension {
 	}
 
 	@Override
-	public void handleMarkup(String value) {
-		System.out.println("Not implemented! " + getClass());
+	public void handleMarkup(String value, Element element) {
+		System.out.println("Not implemented! " + getClass() + " " + value + " "
+				+ element);
 	}
 }
