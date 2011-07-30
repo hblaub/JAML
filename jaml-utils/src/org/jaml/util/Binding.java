@@ -30,8 +30,8 @@ import org.jaml.api.IDelegate;
  *            Parameter's class
  */
 public class Binding<F, S, P> implements IBinding<F, S, P> {
-	private IDelegate<F, P> firstDelegate;
-	private IDelegate<S, P> secondDelegate;
+	protected IDelegate<F, P> firstDelegate;
+	protected IDelegate<S, P> secondDelegate;
 
 	public Binding(IDelegate<F, P> firstDelegate, IDelegate<S, P> secondDelegate) {
 		this.firstDelegate = firstDelegate;
@@ -54,9 +54,13 @@ public class Binding<F, S, P> implements IBinding<F, S, P> {
 				paramClass), Delegate.create(object2, method2, paramClass));
 	}
 
+	protected boolean areBothDelegatesValid() {
+		return firstDelegate.isValid() && secondDelegate.isValid();
+	}
+
 	@Override
 	public boolean apply() {
-		if (!firstDelegate.isValid() || !secondDelegate.isValid()) {
+		if (!areBothDelegatesValid()) {
 			return false;
 		}
 		if (firstDelegate.needsParameter()) {
