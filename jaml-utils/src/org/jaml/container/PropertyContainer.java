@@ -35,6 +35,8 @@ public class PropertyContainer {
 			addGetter(method);
 		} else if (method.getName().startsWith("set")) {
 			addSetter(method);
+		} else if (method.getName().startsWith("add")) {
+			addSetter(method);
 		}
 	}
 

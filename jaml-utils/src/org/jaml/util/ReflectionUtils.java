@@ -162,7 +162,8 @@ public class ReflectionUtils {
 			if (!Modifier.isStatic(method.getModifiers())
 					&& method.getName().length() > 3) {
 				if (method.getName().startsWith("get")
-						|| method.getName().startsWith("set")) {
+						|| method.getName().startsWith("set")
+						|| method.getName().startsWith("add")) {
 					propertyName = method.getName().substring(3);
 					if (!map.containsKey(propertyName)) {
 						map.put(propertyName, new PropertyContainer());
@@ -173,6 +174,22 @@ public class ReflectionUtils {
 			}
 		}
 		return map;
+	}
+
+	public static Method searchSetterMethodWithInterface(ClassCache cache,
+			String attribute, Class<?> interfaceClazz) {
+		Iterator<Method> iterator = cache.set(attribute);
+		List<Class<?>> typeList = getAllInterfacesAndSubClasses(interfaceClazz);
+		Method setter = null;
+		while (iterator.hasNext()) {
+			setter = iterator.next();
+			if (setter.getParameterTypes().length == 1
+					&& setter.getParameterTypes()[0].isInterface()
+					&& typeList.contains(setter.getParameterTypes()[0])) {
+				return setter;
+			}
+		}
+		return null;
 	}
 
 	public static Method searchSetterMethod(ClassCache cache, String attribute,
@@ -187,7 +204,7 @@ public class ReflectionUtils {
 				return setter;
 			}
 		}
-		return null;
+		return searchSetterMethodWithInterface(cache, attribute, clazz);
 	}
 
 	public static Class<?> getPrimitiveTypeIfFound(Class<?> clazz) {
