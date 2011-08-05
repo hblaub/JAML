@@ -16,15 +16,16 @@
  ******************************************************************************/
 package org.jaml.core;
 
-import java.awt.Component;
 import java.io.InputStream;
 
 import org.jaml.api.Defaults;
+import org.jaml.api.IUnit;
 import org.jaml.exceptions.JamlDefinitionNotFoundException;
 import org.jaml.objects.Element;
 import org.jaml.objects.ParentObject;
+import org.jaml.util.ParserHandle;
 
-public class Unit<T> extends ParentObject {
+public class Unit<T> extends ParentObject implements IUnit<T> {
 	protected Element tree;
 	protected T root;
 
@@ -35,17 +36,19 @@ public class Unit<T> extends ParentObject {
 				+ "." + Defaults.alternativeExtension;
 		InputStream stream = getClass().getResourceAsStream(uri);
 		if (stream != null) {
-			tree = JamlReader.load(stream);
+			tree = JamlReader.load(new ParserHandle<T>(this), stream);
 			root = (T) tree.getContent();
 		} else {
 			throw new JamlDefinitionNotFoundException(getClass(), uri);
 		}
 	}
 
+	@Override
 	public Element getTree() {
 		return tree;
 	}
 
+	@Override
 	public T getRoot() {
 		return root;
 	}

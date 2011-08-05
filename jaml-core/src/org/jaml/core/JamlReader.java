@@ -33,6 +33,8 @@ import javax.xml.stream.XMLStreamReader;
 
 import org.jaml.api.Defaults;
 import org.jaml.api.IMarkupExtension;
+import org.jaml.api.IParserHandle;
+import org.jaml.api.IParserHandleConsumer;
 import org.jaml.api.IProportionHandler;
 import org.jaml.api.ITypeConverter;
 import org.jaml.api.ParsingInstructions;
@@ -59,6 +61,11 @@ public class JamlReader {
 	}
 
 	public static Element load(Reader inputReader) {
+		return load(null, inputReader);
+	}
+
+	public static <T> Element load(IParserHandle<T> parserHandle,
+			Reader inputReader) {
 		Element rootElement = null;
 		ParentObject current = null;
 		Element temp = null;
@@ -70,7 +77,7 @@ public class JamlReader {
 				if (reader.isStartElement()) {
 					System.out.println("isStartElement: " + reader.getName());
 					// Parse the element
-					pair = handleStartElement(reader);
+					pair = handleStartElement(parserHandle, reader);
 					if (current != null) {
 						// Get new element and add this new element as a child
 						// to the current element
@@ -151,8 +158,8 @@ public class JamlReader {
 		}
 	}
 
-	private static Pair<Object, Map<ParsingInstructions, String>> handleStartElement(
-			XMLStreamReader reader) {
+	private static <T> Pair<Object, Map<ParsingInstructions, String>> handleStartElement(
+			IParserHandle<T> parserHandle, XMLStreamReader reader) {
 		Object obj = null;
 		Map<ParsingInstructions, String> parsingInstructions = new HashMap<ParsingInstructions, String>();
 		ParsingInstructions instruction = null;
@@ -202,6 +209,8 @@ public class JamlReader {
 								converter = Env.get().getConverters()
 										.get(clazz);
 								if (converter != null) {
+									checkIfParserHandleConsumerAndSetIt(
+											parserHandle, converter);
 									tmp = converter.convertString(attrValue);
 									System.out.println(converter + " " + tmp);
 									setter = ReflectionUtils
@@ -251,6 +260,19 @@ public class JamlReader {
 				parsingInstructions);
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	private static <T> void checkIfParserHandleConsumerAndSetIt(
+			IParserHandle<T> handle, Object object) {
+		if (handle == null)
+			return;
+		if (object instanceof IParserHandleConsumer) {
+			IParserHandleConsumer parserHandleConsumer = (IParserHandleConsumer) object;
+			parserHandleConsumer.setIParserHandle(handle);
+			System.out.println("Giving parser handle to object of class: "
+					+ object.getClass());
+		}
+	}
+
 	private static void handleMarkup(IMarkupExtension extension, String value) {
 		String markup = value.substring(1, value.length() - 1);
 		System.out.println("Markup: '" + markup + "'");
@@ -261,8 +283,13 @@ public class JamlReader {
 		extension.handleMarkup(arg, null);
 	}
 
+	public static <T> Element load(IParserHandle<T> parserHandle,
+			InputStream inputStream) {
+		return load(parserHandle, new InputStreamReader(inputStream));
+	}
+
 	public static Element load(InputStream inputStream) {
-		return load(new InputStreamReader(inputStream));
+		return load(null, inputStream);
 	}
 
 	public static Element load(String input) {
