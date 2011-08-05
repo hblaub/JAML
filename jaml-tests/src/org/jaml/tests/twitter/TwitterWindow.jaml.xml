@@ -22,7 +22,7 @@
 		<JList>
 			<j:ObservableCollection x:Name="list" />
 		</JList>
-		<JButton x:Name="addButton" Text="Add" />
-		<JButton x:Name="delButton" Text="Remove" />
+		<JButton x:Name="addButton" Text="Add" ActionListener="add_button" />
+		<JButton x:Name="delButton" Text="Remove" ActionListener="del_button" />
 	</JPanel>
 </JFrame>

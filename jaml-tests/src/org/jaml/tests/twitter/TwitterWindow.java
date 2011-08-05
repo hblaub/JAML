@@ -20,23 +20,15 @@ import java.awt.event.ActionEvent;
 import java.util.Collection;
 import java.util.Date;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import org.jaml.core.Unit;
-import org.jaml.util.ActionListenerDelegate;
 
 public class TwitterWindow extends Unit<JFrame> {
 	private Collection<String> list;
 
 	public TwitterWindow() {
 		list = get("list");
-		JButton addBtn = get("addButton");
-		addBtn.addActionListener(new ActionListenerDelegate<TwitterWindow>(
-				this, "add_button"));
-		JButton delBtn = get("delButton");
-		delBtn.addActionListener(new ActionListenerDelegate<TwitterWindow>(
-				this, "del_button"));
 	}
 
 	public void add_button(ActionEvent event) {
