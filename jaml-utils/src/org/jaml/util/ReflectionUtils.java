@@ -141,7 +141,7 @@ public class ReflectionUtils {
 										instanceValue);
 							}
 						} catch (Exception e) {
-							System.err.println(property + " -> "
+							throw new NullPointerException(property + " -> "
 									+ e.getClass().getSimpleName() + " ("
 									+ e.getMessage() + ")");
 						}

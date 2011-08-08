@@ -28,12 +28,15 @@ import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 
+import org.apache.log4j.Logger;
 import org.jaml.api.ITypeConverter;
 import org.jaml.cache.Env;
 import org.jaml.util.ReflectionUtils;
 import org.jaml.util.ThreadUtils;
 
 public class JamlWriter {
+	private static final Logger log = Logger.getLogger(JamlWriter.class);
+
 	private static final XMLOutputFactory factory = XMLOutputFactory
 			.newInstance();
 
@@ -66,11 +69,11 @@ public class JamlWriter {
 				converter = Env.get().getConverters().get(obj.getClass());
 				if (converter != null) {
 					text = converter.convertObject(obj);
-					System.out.println(converter + " " + obj + " " + text);
+					log.debug(converter + " " + obj + " " + text);
 					xml.writeAttribute(key, text);
 				} else {
-					System.err.println("No converter found for: "
-							+ obj.getClass() + " " + obj);
+					log.error("No converter found for: " + obj.getClass() + " "
+							+ obj);
 				}
 			}
 			xml.writeEndElement();
@@ -78,7 +81,7 @@ public class JamlWriter {
 			xml.close();
 			return true;
 		} catch (XMLStreamException e) {
-			System.err.println(e.getMessage());
+			log.error(e.getMessage(), e);
 			return false;
 		}
 	}

@@ -31,6 +31,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
 
+import org.apache.log4j.Logger;
 import org.jaml.api.Defaults;
 import org.jaml.api.IMarkupExtension;
 import org.jaml.api.IParserHandle;
@@ -54,6 +55,8 @@ import org.jaml.util.ThreadUtils;
  * 
  */
 public class JamlReader {
+	private static final Logger log = Logger.getLogger(JamlReader.class);
+
 	private static final XMLInputFactory factory = XMLInputFactory
 			.newInstance();
 
@@ -75,7 +78,7 @@ public class JamlReader {
 			while (reader.hasNext()) {
 				reader.next();
 				if (reader.isStartElement()) {
-					System.out.println("isStartElement: " + reader.getName());
+					log.debug("isStartElement: " + reader.getName());
 					// Parse the element
 					pair = handleStartElement(parserHandle, reader);
 					if (current != null) {
@@ -97,16 +100,13 @@ public class JamlReader {
 					// Set it as new current element
 					current = temp;
 				} else if (reader.isCharacters()) {
-					System.out.println("isCharacters: "
-							+ reader.getText().trim());
+					log.debug("isCharacters: " + reader.getText().trim());
 				} else if (reader.isStandalone()) {
-					System.out.println("isStandalone: "
-							+ reader.getText().trim());
+					log.debug("isStandalone: " + reader.getText().trim());
 				} else if (reader.isWhiteSpace()) {
-					System.out.println("isWhiteSpace: "
-							+ reader.getText().trim());
+					log.debug("isWhiteSpace: " + reader.getText().trim());
 				} else if (reader.isEndElement()) {
-					System.out.println("isEndElement: "
+					log.debug("isEndElement: "
 							+ reader.getName().toString().trim());
 					// Get the parent element as new current element
 					current = current.getParent();
@@ -144,7 +144,7 @@ public class JamlReader {
 					parentObj.getClass(), childObj.getClass());
 			IProportionHandler handler = Env.get().getProportions().get(key);
 			if (handler != null) {
-				System.out.println("Invoking: " + handler);
+				log.debug("Invoking: " + handler);
 				handler.process(parentObj, childObj);
 			}
 		}
@@ -187,7 +187,7 @@ public class JamlReader {
 				attrPrefix = reader.getAttributeName(i).getPrefix();
 				// Check if attribute is in another name space than the
 				if (!(attrNameSpace.isEmpty() && attrPrefix.isEmpty())) {
-					System.out.println(attrPrefix + ":" + attrName
+					log.debug(attrPrefix + ":" + attrName
 							+ " is in another namespace: " + attrNameSpace);
 					if (attrNameSpace.equals(Defaults.parserNamespace)) {
 						instruction = ParsingInstructions.valueOf(attrName);
@@ -212,16 +212,15 @@ public class JamlReader {
 									checkIfParserHandleConsumerAndSetIt(
 											parserHandle, converter);
 									tmp = converter.convertString(attrValue);
-									System.out.println(converter + " " + tmp);
+									log.debug(converter + " " + tmp);
 									setter = ReflectionUtils
 											.searchSetterMethod(cache,
 													attrName, tmp.getClass());
 									if (setter == null) {
-										System.err
-												.println(String
-														.format("Could not set '%s' on type '%s'!",
-																tmp.getClass(),
-																obj.getClass()));
+										log.error(String
+												.format("Could not set '%s' on type '%s'!",
+														tmp.getClass(),
+														obj.getClass()));
 									} else {
 										try {
 											setter.invoke(obj, tmp);
@@ -235,26 +234,23 @@ public class JamlReader {
 													attrValue, attrName,
 													fqnClassName,
 													e.getMessage(), stackTrace);
-											System.err.println(text);
+											log.error(text);
 										}
 									}
 								} else {
-									System.err
-											.println("Missing converter for: "
-													+ clazz);
+									log.error("Missing converter for: " + clazz);
 								}
 							}
 						}
 					} else {
-						System.err.println(String.format(
+						log.error(String.format(
 								"Field '%s' is not accessable to be set!",
 								attrName));
 					}
 				}
 			}
 		} catch (Exception e) {
-			System.err.println(e.getClass().getSimpleName() + ": "
-					+ e.getMessage());
+			log.error(e.getClass().getSimpleName() + ": " + e.getMessage(), e);
 		}
 		return new Pair<Object, Map<ParsingInstructions, String>>(obj,
 				parsingInstructions);
@@ -268,18 +264,18 @@ public class JamlReader {
 		if (object instanceof IParserHandleConsumer) {
 			IParserHandleConsumer parserHandleConsumer = (IParserHandleConsumer) object;
 			parserHandleConsumer.setIParserHandle(handle);
-			System.out.println("Giving parser handle to object of class: "
+			log.debug("Giving parser handle to object of class: "
 					+ object.getClass());
 		}
 	}
 
 	private static void handleMarkup(IMarkupExtension extension, String value) {
 		String markup = value.substring(1, value.length() - 1);
-		System.out.println("Markup: '" + markup + "'");
+		log.debug("Markup: '" + markup + "'");
 		String[] splitted = markup.split(" ");
 		String symbol = splitted[0];
 		String arg = splitted[1];
-		System.out.println(symbol + ", " + extension);
+		log.debug(symbol + ", " + extension);
 		extension.handleMarkup(arg, null);
 	}
 

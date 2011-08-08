@@ -19,9 +19,12 @@ package org.jaml.cache;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.jaml.container.ClassCache;
 
 public class ClassCacheLibrary {
+	private static final Logger log = Logger.getLogger(ClassCacheLibrary.class);
+
 	private Map<String, ClassCache> caches;
 
 	private ClassCacheLibrary() {
@@ -32,8 +35,7 @@ public class ClassCacheLibrary {
 
 	public static ClassCacheLibrary getInstance() {
 		if (instance == null) {
-			System.out.println("Instantiation of " + ClassCacheLibrary.class
-					+ "...");
+			log.debug("Instantiation of " + ClassCacheLibrary.class + "...");
 			instance = new ClassCacheLibrary();
 		}
 		return instance;
@@ -46,7 +48,7 @@ public class ClassCacheLibrary {
 	public boolean addToCache(String fQN) {
 		try {
 			caches.put(fQN, new ClassCache(fQN));
-			System.out.println("Added '" + fQN + "' to cache!");
+			log.debug("Added '" + fQN + "' to cache!");
 			return true;
 		} catch (ClassNotFoundException e) {
 			return false;

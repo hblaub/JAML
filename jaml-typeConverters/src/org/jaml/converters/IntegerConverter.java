@@ -47,8 +47,6 @@ public class IntegerConverter extends AbstractTypeConverter {
 				Class<?> foundClass = Class.forName(className);
 				Field field = ReflectionUtils.findFieldByClass(foundClass,
 						fieldName);
-				System.out.println("Field constant '" + field.getName()
-						+ "' found!");
 				return field.get(null);
 			} catch (Exception ex) {
 				// Return minus one, if nothing could be parsed
