@@ -8,5 +8,7 @@
 	<classpathentry combineaccessrules="false" kind="src" path="/jaml-markupExtensions"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jaml-proportionHandlers"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jaml-typeConverters"/>
+	<classpathentry kind="lib" path="lib/junit-4.8.2.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jaml-jsr223"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
