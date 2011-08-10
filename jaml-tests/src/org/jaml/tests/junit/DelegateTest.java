@@ -70,7 +70,6 @@ public class DelegateTest {
 		// Have to fail
 		assertFalse(Delegate.create(null, "getTitle", String.class).isValid());
 		assertFalse(Delegate.create(frame, "failTest", String.class).isValid());
-		// TODO: Make that line fail
 		assertFalse(Delegate.create(frame, "getTitle", int.class).isValid());
 	}
 

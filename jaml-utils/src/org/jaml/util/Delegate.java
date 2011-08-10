@@ -65,7 +65,8 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 
 	private Method searchMethod() {
 		try {
-			return object.getClass().getMethod(methodName);
+			Method method = object.getClass().getMethod(methodName);
+			return method.getReturnType().equals(paramClass) ? method : null;
 		} catch (Exception e) {
 			return null;
 		}
