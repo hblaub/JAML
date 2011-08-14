@@ -67,8 +67,8 @@
 			<property name="jarname" value="jaml-core" />
 			<property name="copy.services" value="false" />
 			<property name="MainClass" value="" />
-			<property name="ClassPath" value="jaml-api.jar jaml-utils.jar" />
-			<property name="CompileClassPath" value=".;dist/jaml-api.jar;dist/jaml-utils.jar" />
+			<property name="ClassPath" value="jaml-api.jar jaml-utils.jar log4j-1.2.16.jar" />
+			<property name="CompileClassPath" value=".;dist/jaml-api.jar;dist/jaml-utils.jar;../jaml-core/lib/log4j-1.2.16.jar" />
 		</ant>
 
 		<ant antfile="onetask.xml">
@@ -78,8 +78,8 @@
 			<property name="jarname" value="jaml-tests" />
 			<property name="copy.services" value="false" />
 			<property name="MainClass" value="org.jaml.tests.TestCLIX" />
-			<property name="ClassPath" value="jaml-core.jar jaml-markupExtensions.jar jaml-proportionHandlers.jar jaml-typeConverters.jar" />
-			<property name="CompileClassPath" value=".;dist/jaml-core.jar" />
+			<property name="ClassPath" value="jaml-core.jar jaml-markupExtensions.jar jaml-proportionHandlers.jar jaml-typeConverters.jar junit-4.8.2.jar" />
+			<property name="CompileClassPath" value=".;dist/jaml-core.jar;../jaml-tests/lib/junit-4.8.2.jar" />
 		</ant>
 
 		<ant antfile="onetask.xml">
