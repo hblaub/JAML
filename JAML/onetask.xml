@@ -29,6 +29,8 @@
 				<include name="**/*.xml" />
 				<include name="**/*.jaml" />
 			</fileset>
+			<!-- include LICENSE file -->
+			<fileset file="LICENSE" />
 			<!-- define MANIFEST.MF -->
 			<manifest>
 				<attribute name="Built-By" value="BuildServer" />
