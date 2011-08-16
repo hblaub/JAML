@@ -3,3 +3,9 @@ Java Application Markup Language
 
 Copyright (C) 2010-2011 by Harry Blauberg
 All files contained in this project, even if not explicitly said, are licensed unter GNU AFFERO GENERAL PUBLIC LICENSE Version 3 (http://www.gnu.org/licenses/agpl-3.0.html). This license was designed by Free Software Foundation (http://www.fsf.org/).
+
+Thanks to the FOSS program at CloudBees (www.cloudbees.com), an official JAML build server is available under:
+https://jaml.ci.cloudbees.com/
+
+Direct link to current zip file: 
+https://jaml.ci.cloudbees.com/job/JAML-master/ws/JAML/dist/*zip*/dist.zip
