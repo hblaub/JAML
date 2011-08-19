@@ -35,7 +35,7 @@ import javax.swing.event.ListDataListener;
  * @param <E>
  *            type of the ObservableCollection
  */
-public class ObservableListModel<E> implements ListModel<E>, Observer {
+public class ObservableListModel<E> implements ListModel, Observer {
 	protected Collection<ListDataListener> listeners;
 	protected ObservableCollection<E> observableCollection;
 

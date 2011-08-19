@@ -33,8 +33,7 @@ public class ListTest {
 	public static void main(String[] args) {
 		final ObservableCollection<TestDTO> collection = new ObservableCollection<TestDTO>();
 		collection.add(new TestDTO("Dummy!"));
-		JList<TestDTO> list = new JList<TestDTO>(
-				new ObservableListModel<TestDTO>(collection));
+		JList list = new JList(new ObservableListModel<TestDTO>(collection));
 
 		JButton btn = new JButton("Add sth. to list?!");
 		btn.addActionListener(new ActionListener() {
