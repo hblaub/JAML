@@ -5,3 +5,4 @@ org.jaml.converters.IntegerConverter
 org.jaml.converters.RectangleConverter
 org.jaml.converters.StringConverter
 org.jaml.converters.ActionListenerConverter
+org.jaml.converters.DoubleConverter
