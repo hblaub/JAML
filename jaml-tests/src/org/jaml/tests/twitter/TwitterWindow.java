@@ -17,11 +17,14 @@
 package org.jaml.tests.twitter;
 
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Collection;
 import java.util.Date;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
+import org.jaml.addons.Script;
 import org.jaml.core.Unit;
 
 public class TwitterWindow extends Unit<JFrame> {
@@ -29,6 +32,9 @@ public class TwitterWindow extends Unit<JFrame> {
 
 	public TwitterWindow() {
 		list = get("list");
+		Script script = get("jScript");
+		JButton testBtn = get("testButton");
+		testBtn.addActionListener(script.compile(ActionListener.class));
 	}
 
 	public void add_button(ActionEvent event) {
