@@ -4,3 +4,5 @@ org.jaml.proportions.AWTMenuBarHandler
 org.jaml.proportions.AWTComponentHandler
 org.jaml.proportions.QueueHandler
 org.jaml.proportions.CollectionHandler
+org.jaml.proportions.IKeyValuePairHandler
+org.jaml.proportions.MapHandler
