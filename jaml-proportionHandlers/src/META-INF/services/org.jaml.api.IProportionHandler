@@ -2,3 +2,5 @@ org.jaml.proportions.JSplitPaneHandler
 org.jaml.proportions.JMenuBarHandler
 org.jaml.proportions.AWTMenuBarHandler
 org.jaml.proportions.AWTComponentHandler
+org.jaml.proportions.QueueHandler
+org.jaml.proportions.CollectionHandler
