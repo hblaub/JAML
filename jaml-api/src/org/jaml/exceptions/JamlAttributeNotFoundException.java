@@ -24,10 +24,11 @@ public class JamlAttributeNotFoundException extends RuntimeException {
 	public JamlAttributeNotFoundException(Class<?> type, String name,
 			String[] allProperties) {
 		super(String.format(
-				"Class '%s' does not have an attribute called '%s'! %s", type
-						.getName(), name,
-				(allProperties.length > 0 ? "Maybe one of the following?"
-						+ getPossibleAttributes(allProperties, name) : "")));
+				"Class '%s' does not have an attribute called '%s'! %s",
+				type.getName(),
+				name,
+				(allProperties.length > 0 ? getPossibleAttributes(
+						allProperties, name) : "")));
 	}
 
 	protected static String getPossibleAttributes(String[] allProperties,
@@ -40,6 +41,8 @@ public class JamlAttributeNotFoundException extends RuntimeException {
 				bld.append(propName);
 			}
 		}
-		return bld.toString().substring(1);
+		String result = bld.toString();
+		return result.isEmpty() ? result : String.format(
+				"Maybe one of the following?%s", result.substring(1));
 	}
 }
