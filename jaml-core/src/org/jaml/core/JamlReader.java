@@ -43,6 +43,7 @@ import org.jaml.cache.ClassCacheLibrary;
 import org.jaml.cache.Env;
 import org.jaml.container.ClassCache;
 import org.jaml.container.ParameterContainer;
+import org.jaml.exceptions.JamlObjectNotInstantiableException;
 import org.jaml.objects.Element;
 import org.jaml.objects.ParentObject;
 import org.jaml.structs.Pair;
@@ -169,6 +170,9 @@ public class JamlReader {
 			ClassCacheLibrary.getInstance().addToCacheIfRequired(className);
 			ClassCache cache = ClassCacheLibrary.getInstance().getCache(
 					className);
+			if (cache == null) {
+				throw new JamlObjectNotInstantiableException(className);
+			}
 			obj = cache.getType().newInstance();
 			String attrName = null;
 			String attrValue = null;
