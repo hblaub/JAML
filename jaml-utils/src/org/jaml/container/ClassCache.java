@@ -28,7 +28,13 @@ public class ClassCache {
 	protected Map<String, PropertyContainer> methods;
 
 	public ClassCache(String className) throws ClassNotFoundException {
-		type = Class.forName(className, true, getClass().getClassLoader());
+		this(className, null);
+	}
+
+	public ClassCache(String className, ClassLoader loader)
+			throws ClassNotFoundException {
+		type = Class.forName(className, true, loader == null ? getClass()
+				.getClassLoader() : loader);
 		methods = ReflectionUtils.createMethodMap(type);
 	}
 
