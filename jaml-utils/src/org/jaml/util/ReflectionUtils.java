@@ -31,6 +31,7 @@ import org.jaml.api.Defaults;
 import org.jaml.container.ClassCache;
 import org.jaml.container.ParameterContainer;
 import org.jaml.container.PropertyContainer;
+import org.jaml.structs.ClassInfo;
 
 public class ReflectionUtils {
 
@@ -84,10 +85,19 @@ public class ReflectionUtils {
 		return false;
 	}
 
-	public static String getClassByNamespace(String namespace,
+	public static ClassInfo getClassByNamespace(String namespace,
 			String elementName) {
-		return namespace.replace(Defaults.namespacePrefix, "")
-				.replace('/', '.') + "." + elementName;
+		String classPackage = namespace;
+		String classSource = null;
+		if (classPackage.contains(Defaults.namespaceSourceSeparator)) {
+			String[] parts = classPackage.replace(
+					Defaults.namespaceSourceSeparator, "#").split("#");
+			classPackage = parts[0].trim();
+			classSource = parts[1].trim();
+		}
+		classPackage = classPackage.replace(Defaults.namespacePrefix, "")
+				.replace('/', '.');
+		return new ClassInfo(classPackage, elementName, classSource);
 	}
 
 	public static String getXMLNamespaceByObject(Object object) {
@@ -95,7 +105,7 @@ public class ReflectionUtils {
 				+ object.getClass().getPackage().getName().replace('.', '/');
 	}
 
-	public static String getClassByNamespace(QName name) {
+	public static ClassInfo getClassByNamespace(QName name) {
 		return getClassByNamespace(name.getNamespaceURI(), name.getLocalPart());
 	}
 
