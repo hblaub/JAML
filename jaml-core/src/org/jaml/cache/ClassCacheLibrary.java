@@ -21,6 +21,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.jaml.container.ClassCache;
+import org.jaml.patches.FileClassLoader;
+import org.jaml.structs.ClassInfo;
 
 public class ClassCacheLibrary {
 	private static final Logger log = Logger.getLogger(ClassCacheLibrary.class);
@@ -45,19 +47,22 @@ public class ClassCacheLibrary {
 		return caches.containsKey(fQN);
 	}
 
-	public boolean addToCache(String fQN) {
+	private boolean addToCache(ClassInfo classInfo) {
 		try {
-			caches.put(fQN, new ClassCache(fQN));
-			log.debug("Added '" + fQN + "' to cache!");
+			ClassLoader newLoader = classInfo.hasSource() ? new FileClassLoader(
+					classInfo.getClassSource()) : null;
+			ClassCache newCache = new ClassCache(classInfo.getFQN(), newLoader);
+			caches.put(classInfo.getFQP(), newCache);
+			log.debug("Added '" + classInfo.getFQP() + "' to cache!");
 			return true;
 		} catch (ClassNotFoundException e) {
 			return false;
 		}
 	}
 
-	public void addToCacheIfRequired(String fQN) {
-		if (!isCached(fQN)) {
-			addToCache(fQN);
+	public void addToCacheIfRequired(ClassInfo classInfo) {
+		if (!isCached(classInfo.getFQP())) {
+			addToCache(classInfo);
 		}
 	}
 
