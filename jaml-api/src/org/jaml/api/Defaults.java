@@ -18,6 +18,10 @@ package org.jaml.api;
 
 import java.util.Locale;
 
+/**
+ * System-wide defaults for JAML parser instances, contains for example file
+ * endings
+ */
 public class Defaults {
 
 	public static final String namespacePrefix = "http://java.com/namespaces/";
@@ -31,4 +35,6 @@ public class Defaults {
 	public static final String alternativeExtension = "xml";
 
 	public static final String emptyString = "";
+
+	public static final String namespaceSourceSeparator = "?src=";
 }
