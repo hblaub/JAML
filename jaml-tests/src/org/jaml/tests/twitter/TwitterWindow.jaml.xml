@@ -18,14 +18,14 @@
 	xmlns:x="http://jaml.com/parser/2011/lang/additions"
 	DefaultCloseOperation="javax.swing.JFrame.EXIT_ON_CLOSE" Size="800;600"
 	Title="Twitter Sample Client">
-	<j:Script x:Name="jScript" Extension="js" TargetType="java.awt.event.ActionListener"	
-	Content="importClass(javax.swing.JOptionPane); function actionPerformed(event) { JOptionPane.showMessageDialog(null, 'Dynamic method called!', 'Test', JOptionPane.OK_CANCEL_OPTION); }"/>	
 	<JPanel>
+		<JPanel>
+			<JTextField x:Name="teSearchWord" Columns="20" />
+			<JButton x:Name="getButton" Text="Get Tweets by search word!"
+				ActionListener="getTweets_Click" />
+		</JPanel>
 		<JList>
 			<j:ObservableCollection x:Name="list" />
 		</JList>
-		<JButton x:Name="addButton" Text="Add" ActionListener="add_button" />
-		<JButton x:Name="delButton" Text="Remove" ActionListener="del_button" />
-		<JButton x:Name="testButton" Text="Test JavaScript" />
 	</JPanel>
 </JFrame>
