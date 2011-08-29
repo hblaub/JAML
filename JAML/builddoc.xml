@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="JAML" default="doAllDoc" basedir=".">
+	<target name="doAllDoc">
+		<!-- Delete the ${builddoc} directory tree -->
+		<delete dir="javadoc" />
+
+		<ant antfile="onetaskdoc.xml">
+			<property name="builddoc" value="javadoc" />
+			<!-- Sources -->
+			<property name="src1" value="../jaml-api/src" />
+			<property name="src2" value="../jaml-markupExtensions/src" />
+			<property name="src3" value="../jaml-proportionHandlers/src" />
+			<property name="src4" value="../jaml-utils/src" />
+			<property name="src5" value="../jaml-typeConverters/src" />
+			<property name="src6" value="../jaml-core/src" />
+			<property name="src7" value="../jaml-tests/src" />
+			<property name="src8" value="../jaml-jsr223/src" />
+		</ant>
+	</target>
+</project>

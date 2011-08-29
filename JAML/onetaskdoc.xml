@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project name="JAML" default="gendoc" basedir=".">
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${builddoc}" />
+	</target>
+
+	<target name="gendoc" depends="init">
+		<!-- Log -->
+		<echo>Started doc creation...</echo>
+		<!-- JavaDoc -->
+		<javadoc destdir="${builddoc}">
+			<fileset dir="${src1}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${src2}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${src3}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${src4}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${src5}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${src6}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${src7}">
+				<include name="**/*.java" />
+			</fileset>
+			<fileset dir="${src8}">
+				<include name="**/*.java" />
+			</fileset>
+		</javadoc>
+		<!-- Log -->
+		<echo>Stopped doc generation!</echo>
+	</target>
+</project>
