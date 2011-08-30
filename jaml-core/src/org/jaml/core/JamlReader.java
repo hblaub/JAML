@@ -102,7 +102,12 @@ public class JamlReader {
 					// Set it as new current element
 					current = temp;
 				} else if (reader.isCharacters()) {
-					log.debug("isCharacters: " + reader.getText().trim());
+					String textElement = reader.getText().trim();
+					if (!textElement.isEmpty() && current != null) {
+						log.debug("isCharacters: " + textElement);
+						temp = current.add(textElement);
+						handleProportions(current, temp);
+					}
 				} else if (reader.isStandalone()) {
 					log.debug("isStandalone: " + reader.getText().trim());
 				} else if (reader.isWhiteSpace()) {
