@@ -13,7 +13,7 @@
 			<property name="src4" value="../jaml-utils/src" />
 			<property name="src5" value="../jaml-typeConverters/src" />
 			<property name="src6" value="../jaml-core/src" />
-			<property name="src7" value="../jaml-tests/src" />
+			<property name="src7" value="../jaml-eclipse/src" />
 			<property name="src8" value="../jaml-jsr223/src" />
 		</ant>
 	</target>
