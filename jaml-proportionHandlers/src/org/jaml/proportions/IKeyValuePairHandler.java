@@ -30,7 +30,7 @@ public class IKeyValuePairHandler extends
 	@Override
 	protected void processWithTypes(IKeyValuePair parent, Object child) {
 		parent.setContent(child);
-		if (parent.getOwner() != null) {
+		if (parent.getOwner() != null && parent.getKey() != null) {
 			parent.getOwner().put(parent.getKey(), parent.getContent());
 		}
 	}
