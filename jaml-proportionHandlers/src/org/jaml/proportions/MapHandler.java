@@ -31,7 +31,7 @@ public class MapHandler extends AbstractProportionHandler<Map, IKeyValuePair> {
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void processWithTypes(Map parent, IKeyValuePair child) {
-		if (child.getKey() != null) {
+		if (child.getKey() != null && child.getContent() != null) {
 			parent.put(child.getKey(), child.getContent());
 		}
 		if (child.getContent() == null) {
