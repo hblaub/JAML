@@ -7,3 +7,8 @@ org.jaml.proportions.CollectionHandler
 org.jaml.proportions.IKeyValuePairHandler
 org.jaml.proportions.MapHandler
 org.jaml.proportions.AbstractButtonTextHandler
+org.jaml.proportions.ILayoutItemAWTHandler
+org.jaml.proportions.ILayoutItemIConstantHandler
+org.jaml.proportions.AWTLayoutManagerHandler
+org.jaml.proportions.AWTLayoutManager2Handler
+org.jaml.proportions.AWTLayoutItemHandler
