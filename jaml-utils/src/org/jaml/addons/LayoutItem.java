@@ -17,12 +17,18 @@
 package org.jaml.addons;
 
 import java.awt.Component;
+import java.awt.Container;
 
 import org.jaml.api.ILayoutItem;
 
+/**
+ * The class LayoutItem is the default implementation of ILayoutItem
+ * 
+ */
 public class LayoutItem implements ILayoutItem {
 	private Component component;
 	private Object constraints;
+	private Container owner;
 
 	@Override
 	public Component getComponent() {
@@ -42,5 +48,15 @@ public class LayoutItem implements ILayoutItem {
 	@Override
 	public void setConstraints(Object constraints) {
 		this.constraints = constraints;
+	}
+
+	@Override
+	public Container getOwner() {
+		return owner;
+	}
+
+	@Override
+	public void setOwner(Container owner) {
+		this.owner = owner;
 	}
 }
