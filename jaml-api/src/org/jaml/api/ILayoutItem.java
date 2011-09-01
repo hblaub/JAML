@@ -17,6 +17,7 @@
 package org.jaml.api;
 
 import java.awt.Component;
+import java.awt.Container;
 
 /**
  * Interface for layout management through JAML
@@ -30,4 +31,8 @@ public interface ILayoutItem {
 	Object getConstraints();
 
 	void setConstraints(Object constraints);
+
+	Container getOwner();
+
+	void setOwner(Container parent);
 }
