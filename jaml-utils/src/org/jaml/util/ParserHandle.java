@@ -21,8 +21,6 @@ import org.jaml.api.IDelegate;
 import org.jaml.api.IParserHandle;
 import org.jaml.api.IUnit;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
 public class ParserHandle<T> implements IParserHandle<T> {
 	private IUnit<T> invoker;
 
@@ -32,7 +30,7 @@ public class ParserHandle<T> implements IParserHandle<T> {
 
 	@Override
 	public IBinding createBinding(String methodName) {
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
