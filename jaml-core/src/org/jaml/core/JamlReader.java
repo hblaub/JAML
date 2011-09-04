@@ -234,6 +234,7 @@ public class JamlReader {
 									} else {
 										try {
 											setter.invoke(obj, tmp);
+											break;
 										} catch (Exception e) {
 											String stackTrace = IOUtils
 													.getStackTraceAsStr(e);
