@@ -17,6 +17,7 @@
 package org.jaml.loaders;
 
 import org.jaml.api.AbstractExtensionLoader;
+import org.jaml.api.Defaults;
 import org.jaml.api.IMarkupExtension;
 
 public class MarkupLoader extends
@@ -29,6 +30,10 @@ public class MarkupLoader extends
 
 	@Override
 	protected boolean eval(IMarkupExtension type, String key) {
+		if (key.length() < 3
+				|| !key.startsWith(Defaults.markupBegin + Defaults.emptyString)
+				|| !key.endsWith(Defaults.markupEnd + Defaults.emptyString))
+			return false;
 		String markup = key.substring(1, key.length() - 1);
 		String[] splitted = markup.split(" ");
 		String symbol = splitted[0];
