@@ -34,7 +34,7 @@ public class DoubleConverter extends AbstractTypeConverter {
 	@Override
 	public Object convertString(Locale locale, String value) {
 		// Check if value contains only numbers with dots
-		if (value.matches("[0-9][0-9]+[.][0-9][0-9]+")) {
+		if (value.matches("[-+]?[0-9]*\\.?[0-9]+")) {
 			return Double.parseDouble(value);
 		}
 		return Double.NaN;
