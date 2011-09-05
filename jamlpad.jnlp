@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!-- codebase="http://localhost:8099/jaws/apps" -->
-<jnlp>
+<jnlp codebase="http://hblaub.github.com/JAML/">
 <information>
 <title>JamlPad</title>
 <vendor>hblaub</vendor>
