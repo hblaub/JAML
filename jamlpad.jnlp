@@ -10,8 +10,16 @@
 <!-- <offline-allowed></offline-allowed> -->
 </information>
 <!-- <security><all-permissions></all-permissions></security> -->
-<resources><j2se version="1.5+"></j2se>
+<resources>
+<j2se version="1.5+"></j2se>
 <jar href="jamlpad.jar"></jar>
+<jar href="jamlpad_lib/log4j-1.2.16.jar"/>
+<jar href="jamlpad_lib/jaml-utils.jar"/>
+<jar href="jamlpad_lib/jaml-api.jar"/>
+<jar href="jamlpad_lib/jaml-proportionHandlers.jar"/>
+<jar href="jamlpad_lib/jaml-markupExtensions.jar"/>
+<jar href="jamlpad_lib/jaml-typeConverters.jar"/>
+<jar href="jamlpad_lib/jaml-core.jar"/>
 </resources>
 <application-desc main-class="com.jamlpad.main.Starter">
 </application-desc>
