@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- codebase="http://localhost:8099/jaws/apps" -->
+<jnlp>
+<information>
+<title>JamlPad</title>
+<vendor>hblaub</vendor>
+<homepage href="http://hblaub.github.com/JAML/"></homepage>
+<description>JAML demo application</description>
+<description kind="short">Write JAML and see a live preview!</description>
+<icon href="icon/icon.gif"></icon>
+<!-- <offline-allowed></offline-allowed> -->
+</information>
+<!-- <security><all-permissions></all-permissions></security> -->
+<resources><j2se version="1.5+"></j2se>
+<jar href="jamlpad.jar"></jar>
+</resources>
+<application-desc main-class="com.jamlpad.main.Starter">
+</application-desc>
+</jnlp>
