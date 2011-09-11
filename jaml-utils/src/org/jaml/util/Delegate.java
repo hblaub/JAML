@@ -71,9 +71,22 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 		return method != null;
 	}
 
+	private Method findMethod(Class<P> paramClass) throws Exception {
+		for (Method method : objectClass.getDeclaredMethods()) {
+			if (method.getName().equalsIgnoreCase(methodName)
+					&& ((paramClass == null) || (method.getParameterTypes().length > 0 && paramClass
+							.equals(method.getParameterTypes()[0])))) {
+				method.setAccessible(true);
+				return method;
+			}
+		}
+		return paramClass == null ? objectClass.getMethod(methodName)
+				: objectClass.getMethod(methodName, paramClass);
+	}
+
 	private Method searchMethod(Class<P> paramClass) {
 		try {
-			return objectClass.getMethod(methodName, paramClass);
+			return findMethod(paramClass);
 		} catch (Exception e) {
 			return null;
 		}
@@ -81,7 +94,7 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 
 	private Method searchMethod() {
 		try {
-			Method method = objectClass.getMethod(methodName);
+			Method method = findMethod(null);
 			return method.getReturnType().equals(paramClass) ? method : null;
 		} catch (Exception e) {
 			return null;
