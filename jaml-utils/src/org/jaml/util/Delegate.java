@@ -32,6 +32,7 @@ import org.jaml.exceptions.DelegateInvalidException;
  */
 public class Delegate<T, P> implements IDelegate<T, P> {
 	private T object;
+	private Class<?> objectClass;
 	private String methodName;
 	private Class<P> paramClass;
 
@@ -42,10 +43,25 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 		return new Delegate<T, P>(object, methodName, paramClass);
 	}
 
-	public Delegate(T object, String methodName, Class<P> paramClass) {
+	public static <T, P> IDelegate<T, P> create(Class<T> objectClass,
+			String methodName, Class<P> paramClass) {
+		return new Delegate<T, P>(objectClass, methodName, paramClass);
+	}
+
+	private Delegate(T object, Class<T> objectClass, String methodName,
+			Class<P> paramClass) {
 		this.object = object;
+		this.objectClass = object == null ? objectClass : object.getClass();
 		this.methodName = methodName;
 		this.paramClass = paramClass;
+	}
+
+	public Delegate(T object, String methodName, Class<P> paramClass) {
+		this(object, null, methodName, paramClass);
+	}
+
+	public Delegate(Class<T> objectClass, String methodName, Class<P> paramClass) {
+		this(null, objectClass, methodName, paramClass);
 	}
 
 	@Override
@@ -57,7 +73,7 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 
 	private Method searchMethod(Class<P> paramClass) {
 		try {
-			return object.getClass().getMethod(methodName, paramClass);
+			return objectClass.getMethod(methodName, paramClass);
 		} catch (Exception e) {
 			return null;
 		}
@@ -65,7 +81,7 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 
 	private Method searchMethod() {
 		try {
-			Method method = object.getClass().getMethod(methodName);
+			Method method = objectClass.getMethod(methodName);
 			return method.getReturnType().equals(paramClass) ? method : null;
 		} catch (Exception e) {
 			return null;
@@ -79,11 +95,11 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 				method.invoke(object, value);
 				return;
 			} catch (Exception exception) {
-				throw new DelegateException(object.getClass(), method, value,
+				throw new DelegateException(objectClass, method, value,
 						exception);
 			}
 		}
-		throw new DelegateInvalidException(object.getClass(), methodName);
+		throw new DelegateInvalidException(objectClass, methodName);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -93,11 +109,11 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 			try {
 				return (P) method.invoke(object);
 			} catch (Exception exception) {
-				throw new DelegateException(object.getClass(), method, object,
+				throw new DelegateException(objectClass, method, object,
 						exception);
 			}
 		}
-		throw new DelegateInvalidException(object.getClass(), methodName);
+		throw new DelegateInvalidException(objectClass, methodName);
 	}
 
 	@Override
@@ -109,7 +125,7 @@ public class Delegate<T, P> implements IDelegate<T, P> {
 	public String toString() {
 		return String.format(
 				"Delegate of class '%s' --> %s",
-				object.getClass().getName(),
+				objectClass.getName(),
 				method == null ? String.format(
 						"should be method %s of type %s!", methodName,
 						paramClass.getName()) : method);
