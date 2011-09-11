@@ -47,7 +47,6 @@ public class DummyClassLoader extends ClassLoader {
 		return null;
 	}
 
-	@Override
 	protected Object getClassLoadingLock(String className) {
 		return null;
 	}
