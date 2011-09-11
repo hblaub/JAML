@@ -110,4 +110,60 @@ public class DelegateTest {
 		assertTrue(delegate.isValid());
 		assertTrue(delegate.needsParameter());
 	}
+
+	/* Instance methods to access */
+	public String doThis1() {
+		return "public String doThis1";
+	}
+
+	String doThis2() {
+		return "String doThis2";
+	}
+
+	protected String doThis3() {
+		return "protected String doThis3";
+	}
+
+	@SuppressWarnings("unused")
+	private String doThis4() {
+		return "private String doThis4";
+	}
+
+	@Test
+	public void testAccessToInstanceMethods() {
+		assertTrue(Delegate.create(this, "doThis1", String.class).isValid());
+		assertTrue(Delegate.create(this, "doThis2", String.class).isValid());
+		assertTrue(Delegate.create(this, "doThis3", String.class).isValid());
+		assertTrue(Delegate.create(this, "doThis4", String.class).isValid());
+	}
+
+	/* Static methods to access */
+	public static String doThis5() {
+		return "public static String doThis5";
+	}
+
+	static String doThis6() {
+		return "static String doThis6";
+	}
+
+	protected static String doThis7() {
+		return "protected static String doThis7";
+	}
+
+	@SuppressWarnings("unused")
+	private static String doThis8() {
+		return "private static String doThis8";
+	}
+
+	@Test
+	public void testAccessToStaticMethods() {
+		assertTrue(Delegate.create(DelegateTest.class, "doThis5", String.class)
+				.isValid());
+		assertTrue(Delegate.create(DelegateTest.class, "doThis6", String.class)
+				.isValid());
+		assertTrue(Delegate.create(DelegateTest.class, "doThis7", String.class)
+				.isValid());
+		assertTrue(Delegate.create(DelegateTest.class, "doThis8", String.class)
+				.isValid());
+	}
 }
