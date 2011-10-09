@@ -20,6 +20,7 @@ import java.awt.Color;
 import java.util.Locale;
 
 import org.jaml.api.AbstractTypeConverter;
+import org.jaml.util.KnownColor;
 
 public class ColorConverter extends AbstractTypeConverter {
 
@@ -39,6 +40,11 @@ public class ColorConverter extends AbstractTypeConverter {
 
 	@Override
 	public Object convertString(Locale locale, String value) {
-		return Color.decode(value);
+		if (value.startsWith("#"))
+			return Color.decode(value.substring(1));
+		for (KnownColor knownColor : KnownColor.values())
+			if (knownColor.name().equalsIgnoreCase(value))
+				return knownColor.getColor();
+		return KnownColor.Violet.getColor();
 	}
 }

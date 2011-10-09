@@ -26,7 +26,7 @@
 	</JMenuBar>
 	<JSplitPane Orientation="javax.swing.JSplitPane.VERTICAL_SPLIT">
 		<JPanel>
-			<JButton Text="FirstButton" x:Name="double" />
+			<JButton Text="FirstButton" Foreground="wheat" Background="lightblue" x:Name="double" />
 			<jaml:Style Name="MyStyle" x:Name="single">
 				<JButton x:Name="triple" Text="Red" />
 			</jaml:Style>
